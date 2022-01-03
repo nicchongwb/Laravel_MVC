@@ -15,7 +15,7 @@
                     <a href="" class="p-3">Home</a>
                 </li>
                 <li>
-                    <a href="" class="p-3">Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
                 </li>
                 <li>
                     <a href="" class="p-3">Post</a>
@@ -23,18 +23,27 @@
             </ul>
 
             <ul class="flex items-center">
-                <li>
-                    <a href="" class="p-3">Nicholas</a>
-                </li>
-                <li>
-                    <a href="" class="p-3">Login</a>
-                </li>
-                <li>
-                    <a href="" class="p-3">Register</a>
-                </li>
-                <li>
-                    <a href="" class="p-3">Logout</a>
-                </li>
+                @auth
+                    <li>
+                        <a href="" class="p-3">Nicholas</a>
+                    </li>
+                    <!-- Create a form for logout to prevent CSRF -->
+                    <li>
+                        <form action="{{ route('logout') }}" method="post" class="p-3 inline">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                @endauth
+
+                @guest
+                    <li>
+                        <a href="{{ route('login') }}" class="p-3">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}" class="p-3">Register</a>
+                    </li>
+                @endguest         
             </ul>
         </nav>
         @yield('content')

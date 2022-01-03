@@ -104,6 +104,15 @@ php artisan migrate
 php artisan migrate:rollback
 ```
 
+## Starting Dev Env
+```bash
+cd larassc
+php artisan serve --host 0.0.0.0
+
+cd larassc
+npm run watch # start npm modules eg. tailwindcss
+```
+
 ## Development
 Create controller:
 ```bash
