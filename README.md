@@ -106,6 +106,8 @@ php artisan migrate:rollback
 
 ## Starting Dev Env
 ```bash
+sudo service postgresql start # Start pgsql service
+
 cd larassc
 php artisan serve --host 0.0.0.0
 
@@ -127,3 +129,13 @@ php artisan make::controller <Name of dir>/<Name>Controller
 Create view:
 1. Create a dir in resources/views, this dir name is same as the sub dir above (eg. auth)
 2. Create a new file called <name>.blade.php (eg. register.blade.php) 
+
+Middleware (filtering mechanism between request and response):
+- eg. verify if user is authenticated or not
+- HTTP/Middleware/Kernel.php : all our middleware headers and group definition
+
+Protecting dashboard against unauthenticated access with middleware route:
+- add '->middleware('auth')' to dashboard route in web.php OR
+- under controller class: create a __construct() with '$this->middleware(['auth']);'
+
+

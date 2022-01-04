@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    // Middleware to not allow authenticated user to access register page
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     public function index()
     {
         return view('auth.register');

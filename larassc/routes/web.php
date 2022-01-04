@@ -25,7 +25,10 @@ Route::get('/', function(){
     return view('home');
 })->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// add middleware auth to deny unauthenticated access to dashboard
+// middleware is in dashboard controller class
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
 // Logout should always be POST to avoid CSRF, we need to supply data to make the API call
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
