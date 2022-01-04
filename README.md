@@ -138,4 +138,39 @@ Protecting dashboard against unauthenticated access with middleware route:
 - add '->middleware('auth')' to dashboard route in web.php OR
 - under controller class: create a __construct() with '$this->middleware(['auth']);'
 
+Create Model && Migration - eg. Schema to hold posts made by users
+
+```bash
+# -m : migration
+# -f : factory
+php artisan make:model Post -m -f
+
+# Make changes to the migration, model, factory files and then run:
+php artisan migrate
+```
+
+Laravel Debugbar: [github repo](https://github.com/barryvdh/laravel-debugbar)
+```bash
+# Download module on dev system
+composer require barryvdh/laravel-debugbar --dev
+# Refresh browser to get the debugbar
+```
+
+Authorization Policy
+```bash
+php artisan make:policy PostPolicy
+```
+
+Blade component similar to PHP include but more powerfull...
+```bash
+php artisan make:component Post
+```
+
+Soft deletion - Model -> to mark in DB as deleted but not delete the row
+```bash
+# eg. when user like a post and dislike a post, we want to denote delete/dislike state in DB likes table
+php artisan make:migration add_soft_deletes_to_likes_table --table=likes
+
+```
+
 

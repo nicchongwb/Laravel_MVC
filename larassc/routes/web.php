@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -30,6 +33,8 @@ Route::get('/', function(){
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
+Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('users.posts');
+
 // Logout should always be POST to avoid CSRF, we need to supply data to make the API call
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
@@ -41,6 +46,10 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/posts', function () {
-    return view('posts.index');
-});
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/posts', [PostController::class, 'post']);
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('posts.delete');
+
+Route::post('/posts/{post}/likes', [PostLikeController::class, 'like'])->name('posts.likes');
+Route::delete('/posts/{post}/likes', [PostLikeController::class, 'dislike'])->name('posts.likes');
